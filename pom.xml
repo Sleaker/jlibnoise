@@ -1,17 +1,10 @@
-<!--
-  Maven build file for jlibnoise
-
-	Copyright (c) 2011 Garrett Fleenor <kylegar@kylegar.net>
-	jlibnoise is licensed under GNU LESSER GENERAL PUBLIC LICENSE Version 3
--->
-
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<!-- Project information -->
-	<groupId>net.royawesome</groupId>
+	<groupId>net.libnoise</groupId>
 	<artifactId>jlibnoise</artifactId>
-	<version>dev-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>jlibnoise</name>
 	<description>A straight port of libnoise to Java.</description>
 
@@ -23,27 +16,6 @@
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
-
-	<!-- Source code -->
-	<scm>
-		<developerConnection>scm:git:git@github.com:RoyAwesome/${project.name}.git</developerConnection>
-		<connection>scm:git:git://github.com/RoyAwesome/${project.name}.git</connection>
-		<url>https://github.com/RoyAwesome/${project.name}</url>
-	</scm>
-
-	<!-- Continuous integration -->
-	<ciManagement>
-		<system>jenkins</system>
-		<url>http://ci.getspout.org</url>
-	</ciManagement>
-
-	<!-- Repository locations -->
-	<repositories>
-		<repository>
-			<id>spout-repo</id>
-			<url>http://repo.getspout.org</url>
-		</repository>
-	</repositories>
 
 	<build>
 		<defaultGoal>clean install</defaultGoal>

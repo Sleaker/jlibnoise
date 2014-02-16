@@ -17,7 +17,7 @@
  This is a port of libnoise ( http://libnoise.sourceforge.net/index.html ).  Original implementation by Jason Bevins
 
 */
-package net.jlibnoise.module.source;
+package net.jlibnoise.module.generator;
 
 import net.jlibnoise.MathHelper;
 import net.jlibnoise.Utils;

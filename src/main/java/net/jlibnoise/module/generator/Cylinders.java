@@ -18,7 +18,7 @@
 
 */
 
-package net.jlibnoise.module.source;
+package net.jlibnoise.module.generator;
 
 import net.jlibnoise.MathHelper;
 import net.jlibnoise.Utils;

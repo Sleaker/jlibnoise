@@ -18,49 +18,33 @@
 
 */
 
-package net.jlibnoise.module.combiner;
+package net.jlibnoise.module.generator;
 
-import net.jlibnoise.Utils;
-import net.jlibnoise.exception.NoModuleException;
 import net.jlibnoise.module.Module;
 
-public class Blend extends Module {
+public class Const extends Module {
+	double value = 0.0;
 
-	public Blend() {
-		super(3);
+	public Const() {
+		super(0);
 	}
 
-	public Module getControlModule() {
-		if (sourceModule[2] == null)
-			throw new NoModuleException();
-		return sourceModule[2];
+	public double getValue() {
+		return value;
 	}
 
-	public void setControlModule(Module module) {
-		if (module == null)
-			throw new IllegalArgumentException("Control Module cannot be null");
-		sourceModule[2] = module;
+	public void setValue(double value) {
+		this.value = value;
 	}
 
 	@Override
 	public int getSourceModuleCount() {
-		return 3;
+		return 0;
 	}
 
 	@Override
 	public double getValue(double x, double y, double z) {
-		if (sourceModule[0] == null)
-			throw new NoModuleException();
-		if (sourceModule[1] == null)
-			throw new NoModuleException();
-		if (sourceModule[2] == null)
-			throw new NoModuleException();
-
-		double v0 = sourceModule[0].getValue(x, y, z);
-		double v1 = sourceModule[1].getValue(x, y, z);
-		double alpha = (sourceModule[2].getValue(x, y, z) + 1.0) / 2.0;
-		return Utils.linearInterp(v0, v1, alpha);
-
+		return value;
 	}
 
 }

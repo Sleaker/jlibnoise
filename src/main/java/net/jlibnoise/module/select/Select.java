@@ -17,7 +17,7 @@
  This is a port of libnoise ( http://libnoise.sourceforge.net/index.html ).  Original implementation by Jason Bevins
 
 */
-package net.jlibnoise.module.combiner;
+package net.jlibnoise.module.select;
 
 import net.jlibnoise.Utils;
 import net.jlibnoise.exception.NoModuleException;

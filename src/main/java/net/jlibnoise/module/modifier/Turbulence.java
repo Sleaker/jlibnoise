@@ -21,7 +21,7 @@ package net.jlibnoise.module.modifier;
 
 import net.jlibnoise.exception.NoModuleException;
 import net.jlibnoise.module.Module;
-import net.jlibnoise.module.source.Perlin;
+import net.jlibnoise.module.generator.Perlin;
 
 public class Turbulence extends Module {
 	/// Default frequency for the noise::module::Turbulence noise module.

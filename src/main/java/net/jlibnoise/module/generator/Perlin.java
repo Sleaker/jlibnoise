@@ -18,7 +18,7 @@
 
 */
 
-package net.jlibnoise.module.source;
+package net.jlibnoise.module.generator;
 
 import net.jlibnoise.NoiseGen;
 import net.jlibnoise.NoiseQuality;
@@ -117,7 +117,7 @@ import net.jlibnoise.module.Module;
  * libnoise, I noticed that my coherent-noise function generated terrain
  * with some "regularity" to the terrain features.  This page describes a
  * better coherent-noise function called <i>gradient noise</i>.  This
- * version of noise::module::Perlin uses gradient coherent noise to
+ * version of {@link Perlin} uses gradient coherent noise to
  * generate Perlin noise.
  */
 public class Perlin extends Module {
@@ -165,34 +165,98 @@ public class Perlin extends Module {
 		super(0);
 	}
 
+    /**
+     * Returns the frequency of the first octave.
+     *
+     * @return The frequency of the first octave.
+     */
 	public double getFrequency() {
 		return frequency;
 	}
 
+    /**
+     * Sets the frequency of the first octave.
+     *
+     * @param frequency The frequency of the first octave.
+     */
 	public void setFrequency(double frequency) {
 		this.frequency = frequency;
 	}
 
+    /**
+     * Returns the lacunarity of the Perlin noise.
+     * <p/>
+     * The lacunarity is the frequency multiplier between successive
+     * octaves.
+     *
+     * @return The lacunarity of the Perlin noise.
+     */
 	public double getLacunarity() {
 		return lacunarity;
 	}
 
+    /**
+     * Sets the lacunarity of the Perlin noise.
+     * <p/>
+     * The lacunarity is the frequency multiplier between successive octaves.
+     * <p/>
+     * For best results, set the lacunarity to a number between 1.5 and
+     * 3.5
+     *
+     * @param lacunarity The lacunarity of the Perlin noise.
+     */
 	public void setLacunarity(double lacunarity) {
 		this.lacunarity = lacunarity;
 	}
 
+    /**
+     * Returns the quality of the Perlin noise.
+     *
+     * @return The quality of the Perlin noise.
+     * @see NoiseQuality for definitions of the various
+     *      coherent-noise qualities.
+     */
 	public NoiseQuality getNoiseQuality() {
 		return noiseQuality;
 	}
 
+
+    /**
+     * Sets the quality of the Perlin noise.
+     *
+     * @param noiseQuality The quality of the Perlin noise.
+     * @see {@link NoiseQuality} for definitions of the various
+     *      coherent-noise qualities.
+     */
 	public void setNoiseQuality(NoiseQuality noiseQuality) {
 		this.noiseQuality = noiseQuality;
 	}
 
+    /**
+     * Returns the number of octaves that generate the Perlin noise.
+     * <p/>
+     * The number of octaves controls the amount of detail in the Perlin
+     * noise.
+     *
+     * @return The number of octaves that generate the Perlin noise.
+     */
 	public int getOctaveCount() {
 		return octaveCount;
 	}
 
+    /**
+     * Sets the number of octaves that generate the Perlin noise.
+     * <p/>
+     * The number of octaves controls the amount of detail in the Perlin noise.
+     * <p/>
+     * The larger the number of octaves, the more time required to
+     * calculate the Perlin-noise value.
+     *
+     * @param octaveCount The number of octaves that generate the Perlin noise.
+     * @throws IllegalArgumentException An invalid parameter was
+     *                               specified; see the preconditions for more information.
+     * @pre The number of octaves ranges from 1 to PERLIN_MAX_OCTAVE.
+     */
 	public void setOctaveCount(int octaveCount) {
 		if (octaveCount < 1 || octaveCount > PERLIN_MAX_OCTAVE) {
 			throw new IllegalArgumentException("octaveCount must be between 1 and MAX OCTAVE: " + PERLIN_MAX_OCTAVE);
@@ -201,18 +265,44 @@ public class Perlin extends Module {
 		this.octaveCount = octaveCount;
 	}
 
+    /**
+     * Returns the persistence value of the Perlin noise.
+     * <p/>
+     * The persistence value controls the roughness of the Perlin noise.
+     *
+     * @return The persistence value of the Perlin noise.
+     */
 	public double getPersistence() {
 		return persistence;
 	}
 
+    /**
+     * Sets the persistence value of the Perlin noise.
+     * <p/>
+     * The persistence value controls the roughness of the Perlin noise.
+     * <p/>
+     * For best results, set the persistence to a number between 0.0 and 1.0.
+     *
+     * @param persistence The persistence value of the Perlin noise.
+     */
 	public void setPersistence(double persistence) {
 		this.persistence = persistence;
 	}
 
+    /**
+     * Returns the seed value used by the Perlin-noise function.
+     *
+     * @return The seed value.
+     */
 	public int getSeed() {
 		return seed;
 	}
 
+    /**
+     * Sets the seed value used by the Perlin-noise function.
+     *
+     * @param seed The seed value.
+     */
 	public void setSeed(int seed) {
 		this.seed = seed;
 	}

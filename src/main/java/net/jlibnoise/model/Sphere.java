@@ -103,7 +103,7 @@ public class Sphere {
 	public double getValue(double lat, double log) {
 		if (module == null)
 			throw new NoModuleException();
-		double[] vec = Utils.LatLonToXYZ(lat, log);
+		double[] vec = Utils.latLonToXYZ(lat, log);
 		return module.getValue(vec[0], vec[1], vec[2]);
 	}
 }

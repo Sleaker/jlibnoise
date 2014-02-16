@@ -56,7 +56,7 @@ public class Cylinders extends Module {
         double distFromCenter = MathHelper.sqrt(x1 * x1 + z1 * z1);
         double distFromSmallerSphere = distFromCenter - MathHelper.floor(distFromCenter);
         double distFromLargerSphere = 1.0 - distFromSmallerSphere;
-        double nearestDist = Utils.GetMin(distFromSmallerSphere, distFromLargerSphere);
+        double nearestDist = Utils.getMin(distFromSmallerSphere, distFromLargerSphere);
         return 1.0 - (nearestDist * 4.0); // Puts it in the -1.0 to +1.0 range.
 
     }

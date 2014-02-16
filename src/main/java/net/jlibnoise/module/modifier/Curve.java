@@ -103,10 +103,10 @@ public class Curve extends Module {
 
 		// Find the four nearest control points so that we can perform cubic
 		// interpolation.
-		int index0 = Utils.ClampValue(indexPos - 2, 0, controlPoints.size() - 1);
-		int index1 = Utils.ClampValue(indexPos - 1, 0, controlPoints.size() - 1);
-		int index2 = Utils.ClampValue(indexPos, 0, controlPoints.size() - 1);
-		int index3 = Utils.ClampValue(indexPos + 1, 0, controlPoints.size() - 1);
+		int index0 = Utils.clampValue(indexPos - 2, 0, controlPoints.size() - 1);
+		int index1 = Utils.clampValue(indexPos - 1, 0, controlPoints.size() - 1);
+		int index2 = Utils.clampValue(indexPos, 0, controlPoints.size() - 1);
+		int index3 = Utils.clampValue(indexPos + 1, 0, controlPoints.size() - 1);
 
 		// If some control points are missing (which occurs if the value from the
 		// source module is greater than the largest input value or less than the
@@ -122,7 +122,7 @@ public class Curve extends Module {
 		double alpha = (sourceModuleValue - input0) / (input1 - input0);
 
 		// Now perform the cubic interpolation given the alpha value.
-		return Utils.CubicInterp(controlPoints.get(index0).outputValue, controlPoints.get(index1).outputValue, controlPoints.get(index2).outputValue, controlPoints.get(index3).outputValue, alpha);
+		return Utils.cubicInterp(controlPoints.get(index0).outputValue, controlPoints.get(index1).outputValue, controlPoints.get(index2).outputValue, controlPoints.get(index3).outputValue, alpha);
 
 	}
 

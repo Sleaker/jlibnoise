@@ -20,36 +20,71 @@
 package net.jlibnoise.module.source;
 
 import net.jlibnoise.MathHelper;
-import net.jlibnoise.Noise;
+import net.jlibnoise.NoiseGen;
 import net.jlibnoise.Utils;
 import net.jlibnoise.module.Module;
 
+/**
+ * Noise module that outputs Voronoi cells.
+ *
+ * In mathematics, a <i>Voronoi cell</i> is a region containing all the
+ * points that are closer to a specific <i>seed point</i> than to any
+ * other seed point.  These cells mesh with one another, producing
+ * polygon-like formations.
+ *
+ * By default, this noise module randomly places a seed point within
+ * each unit cube.  By modifying the <i>frequency</i> of the seed points,
+ * an application can change the distance between seed points.  The
+ * higher the frequency, the closer together this noise module places
+ * the seed points, which reduces the size of the cells.  To specify the
+ * frequency of the cells, call the SetFrequency() method.
+ *
+ * This noise module assigns each Voronoi cell with a random constant
+ * value from a coherent-noise function.  The <i>displacement value</i>
+ * controls the range of random values to assign to each cell.  The
+ * range of random values is +/- the displacement value.  Call the
+ * SetDisplacement() method to specify the displacement value.
+ *
+ * To modify the random positions of the seed points, call the SetSeed()
+ * method.
+ *
+ * This noise module can optionally add the distance from the nearest
+ * seed to the output value.  To enable this feature, call the
+ * EnableDistance() method.  This causes the points in the Voronoi cells
+ * to increase in value the further away that point is from the nearest
+ * seed point.
+ *
+ * Voronoi cells are often used to generate cracked-mud terrain
+ * formations or crystal-like textures
+ *
+ * This noise module requires no source modules.
+ */
 public class Voronoi extends Module {
 
-	/// Default displacement to apply to each cell for the
-	/// noise::module::Voronoi noise module.
+	// Default displacement to apply to each cell for the
+	// noise::module::Voronoi noise module.
 	public static final double DEFAULT_VORONOI_DISPLACEMENT = 1.0;
 
-	/// Default frequency of the seed points for the noise::module::Voronoi
-	/// noise module.
+	// Default frequency of the seed points for the noise::module::Voronoi
+	// noise module.
 	public static final double DEFAULT_VORONOI_FREQUENCY = 1.0;
 
-	/// Default seed of the noise function for the noise::module::Voronoi
-	/// noise module.
+	// Default seed of the noise function for the noise::module::Voronoi
+	// noise module.
 	public static final int DEFAULT_VORONOI_SEED = 0;
 
-	/// Scale of the random displacement to apply to each Voronoi cell.
+	// Scale of the random displacement to apply to each Voronoi cell.
 	double displacement = DEFAULT_VORONOI_DISPLACEMENT;
 
-	/// Determines if the distance from the nearest seed point is applied to
-	/// the output value.
+	// Determines if the distance from the nearest seed point is applied to
+	// the output value.
 	boolean enableDistance = false;
 
-	/// Frequency of the seed points.
+	// Frequency of the seed points.
 	double frequency = DEFAULT_VORONOI_FREQUENCY;
 
-	/// Seed value used by the coherent-noise function to determine the
-	/// positions of the seed points.
+	// Seed value used by the coherent-noise function to determine the
+	// positions of the seed points.
 	int seed = DEFAULT_VORONOI_SEED;
 
 	public Voronoi() {
@@ -68,6 +103,20 @@ public class Voronoi extends Module {
 		return enableDistance;
 	}
 
+    /**
+     * Enables or disables applying the distance from the nearest seed
+     * point to the output value.
+     *
+     * @param enable Specifies whether to apply the distance to the
+     * output value or not.
+     *
+     * Applying the distance from the nearest seed point to the output
+     * value causes the points in the Voronoi cells to increase in value
+     * the further away that point is from the nearest seed point.
+     * Setting this value to @a true (and setting the displacement to a
+     * near-zero value) causes this noise module to generate cracked mud
+     * formations.
+     */
 	public void setEnableDistance(boolean enableDistance) {
 		this.enableDistance = enableDistance;
 	}
@@ -123,9 +172,9 @@ public class Voronoi extends Module {
 
                     // Calculate the position and distance to the seed point inside of
                     // this unit cube.
-                    double xPos = xCur + Noise.ValueNoise3D(xCur, yCur, zCur, seed);
-                    double yPos = yCur + Noise.ValueNoise3D(xCur, yCur, zCur, seed + 1);
-                    double zPos = zCur + Noise.ValueNoise3D(xCur, yCur, zCur, seed + 2);
+                    double xPos = xCur + NoiseGen.valueNoise3D(xCur, yCur, zCur, seed);
+                    double yPos = yCur + NoiseGen.valueNoise3D(xCur, yCur, zCur, seed + 1);
+                    double zPos = zCur + NoiseGen.valueNoise3D(xCur, yCur, zCur, seed + 2);
                     double xDist = xPos - x1;
                     double yDist = yPos - y1;
                     double zDist = zPos - z1;
@@ -155,7 +204,7 @@ public class Voronoi extends Module {
         }
 
         // Return the calculated distance with the displacement value applied.
-        return value + (displacement * Noise.ValueNoise3D((int) (MathHelper.floor(xCandidate)), (int) (MathHelper.floor(yCandidate)), (int) (MathHelper.floor(zCandidate)), seed));
+        return value + (displacement * NoiseGen.valueNoise3D((int) (MathHelper.floor(xCandidate)), (int) (MathHelper.floor(yCandidate)), (int) (MathHelper.floor(zCandidate)), seed));
 
     }
 

@@ -117,8 +117,8 @@ public class Select extends Module {
 				// the output values from the first and second source modules.
 				double lowerCurve = (lowerBound - edgeFalloff);
 				double upperCurve = (lowerBound + edgeFalloff);
-				alpha = Utils.SCurve3((controlValue - lowerCurve) / (upperCurve - lowerCurve));
-				return Utils.LinearInterp(sourceModule[0].getValue(x, y, z), sourceModule[1].getValue(x, y, z), alpha);
+				alpha = Utils.sCurve3((controlValue - lowerCurve) / (upperCurve - lowerCurve));
+				return Utils.linearInterp(sourceModule[0].getValue(x, y, z), sourceModule[1].getValue(x, y, z), alpha);
 
 			} else if (controlValue < (upperBound - edgeFalloff)) {
 				// The output value from the control module is within the selector
@@ -131,8 +131,8 @@ public class Select extends Module {
 				// the output values from the first and second source modules.
 				double lowerCurve = (upperBound - edgeFalloff);
 				double upperCurve = (upperBound + edgeFalloff);
-				alpha = Utils.SCurve3((controlValue - lowerCurve) / (upperCurve - lowerCurve));
-				return Utils.LinearInterp(sourceModule[1].getValue(x, y, z), sourceModule[0].getValue(x, y, z), alpha);
+				alpha = Utils.sCurve3((controlValue - lowerCurve) / (upperCurve - lowerCurve));
+				return Utils.linearInterp(sourceModule[1].getValue(x, y, z), sourceModule[0].getValue(x, y, z), alpha);
 
 			} else {
 				// Output value from the control module is above the selector threshold;

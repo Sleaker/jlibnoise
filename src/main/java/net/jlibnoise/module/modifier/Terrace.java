@@ -32,7 +32,7 @@ public class Terrace extends Module {
 	boolean invertTerraces = false;
 
 	/// Array that stores the control points.
-	double[] ControlPoints = new double[0];
+	double[] controlPoints = new double[0];
 
 	public Terrace() {
 		super(1);
@@ -51,44 +51,44 @@ public class Terrace extends Module {
 	}
 
 	public double[] getControlPoints() {
-		return ControlPoints;
+		return controlPoints;
 	}
 
-	public void AddControlPoint(double value) {
-		int insertionPos = FindInsertionPos(value);
-		InsertAtPos(insertionPos, value);
+	public void addControlPoint(double value) {
+		int insertionPos = findInsertionPos(value);
+		insertAtPos(insertionPos, value);
 	}
 
-	public void ClearAllControlPoints() {
-		ControlPoints = null;
+	public void clearAllControlPoints() {
+		controlPoints = null;
 		controlPointCount = 0;
 
 	}
 
-	public void MakeControlPoints(int controlPointCount) {
+	public void makeControlPoints(int controlPointCount) {
 		if (controlPointCount < 2) {
 			throw new IllegalArgumentException("Must have more than 2 control points");
 		}
 
-		ClearAllControlPoints();
+		clearAllControlPoints();
 
 		double terraceStep = 2.0 / (controlPointCount - 1.0);
 		double curValue = -1.0;
 		for (int i = 0; i < controlPointCount; i++) {
-			AddControlPoint(curValue);
+			addControlPoint(curValue);
 			curValue += terraceStep;
 		}
 
 	}
 
-	protected int FindInsertionPos(double value) {
+	protected int findInsertionPos(double value) {
 		int insertionPos;
 		for (insertionPos = 0; insertionPos < controlPointCount; insertionPos++) {
-			if (value < ControlPoints[insertionPos]) {
+			if (value < controlPoints[insertionPos]) {
 				// We found the array index in which to insert the new control point.
 				// Exit now.
 				break;
-			} else if (value == ControlPoints[insertionPos]) {
+			} else if (value == controlPoints[insertionPos]) {
 				// Each control point is required to contain a unique value, so throw
 				// an exception.
 				throw new IllegalArgumentException("Value must be unique");
@@ -98,7 +98,7 @@ public class Terrace extends Module {
 
 	}
 
-	protected void InsertAtPos(int insertionPos, double value) {
+	protected void insertAtPos(int insertionPos, double value) {
 		// Make room for the new control point at the specified position within
 		// the control point array.  The position is determined by the value of
 		// the control point; the control points must be sorted by value within
@@ -106,18 +106,18 @@ public class Terrace extends Module {
 		double[] newControlPoints = new double[controlPointCount + 1];
 		for (int i = 0; i < controlPointCount; i++) {
 			if (i < insertionPos) {
-				newControlPoints[i] = ControlPoints[i];
+				newControlPoints[i] = controlPoints[i];
 			} else {
-				newControlPoints[i + 1] = ControlPoints[i];
+				newControlPoints[i + 1] = controlPoints[i];
 			}
 		}
 
-		ControlPoints = newControlPoints;
+		controlPoints = newControlPoints;
 		++controlPointCount;
 
 		// Now that we've made room for the new control point within the array,
 		// add the new control point.
-		ControlPoints[insertionPos] = value;
+		controlPoints[insertionPos] = value;
 
 	}
 
@@ -138,27 +138,27 @@ public class Terrace extends Module {
 		// larger than the output value from the source module.
 		int indexPos;
 		for (indexPos = 0; indexPos < controlPointCount; indexPos++) {
-			if (sourceModuleValue < ControlPoints[indexPos]) {
+			if (sourceModuleValue < controlPoints[indexPos]) {
 				break;
 			}
 		}
 
 		// Find the two nearest control points so that we can map their values
 		// onto a quadratic curve.
-		int index0 = Utils.ClampValue(indexPos - 1, 0, controlPointCount - 1);
-		int index1 = Utils.ClampValue(indexPos, 0, controlPointCount - 1);
+		int index0 = Utils.clampValue(indexPos - 1, 0, controlPointCount - 1);
+		int index1 = Utils.clampValue(indexPos, 0, controlPointCount - 1);
 
 		// If some control points are missing (which occurs if the output value from
 		// the source module is greater than the largest value or less than the
 		// smallest value of the control point array), get the value of the nearest
 		// control point and exit now.
 		if (index0 == index1) {
-			return ControlPoints[index1];
+			return controlPoints[index1];
 		}
 
 		// Compute the alpha value used for linear interpolation.
-		double value0 = ControlPoints[index0];
-		double value1 = ControlPoints[index1];
+		double value0 = controlPoints[index0];
+		double value1 = controlPoints[index1];
 		double alpha = (sourceModuleValue - value0) / (value1 - value0);
 		if (invertTerraces) {
 			alpha = 1.0 - alpha;
@@ -171,7 +171,7 @@ public class Terrace extends Module {
 		alpha *= alpha;
 
 		// Now perform the linear interpolation given the alpha value.
-		return Utils.LinearInterp(value0, value1, alpha);
+		return Utils.linearInterp(value0, value1, alpha);
 
 	}
 

@@ -44,7 +44,7 @@ public class Min extends Module {
 
 		double v0 = sourceModule[0].getValue(x, y, z);
 		double v1 = sourceModule[1].getValue(x, y, z);
-		return Utils.GetMin(v0, v1);
+		return Utils.getMin(v0, v1);
 	}
 
 }

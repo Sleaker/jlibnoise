@@ -20,8 +20,8 @@
 
 package net.jlibnoise.model;
 
+import net.jlibnoise.Module;
 import net.jlibnoise.exception.NoModuleException;
-import net.jlibnoise.module.Module;
 
 /**
  * Model that defines the displacement of a line segment.

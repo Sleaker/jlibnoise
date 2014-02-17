@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import net.jlibnoise.module.generator.Perlin;
+import net.jlibnoise.generator.Perlin;
 
 public class TutorialTest {
 

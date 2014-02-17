@@ -351,6 +351,14 @@ public class MathHelper {
 			return x;
 		}
 	}
+	
+	/**
+	 * Computes dot product of 3D vector and x,y,z
+	 * @return the dot product
+	 */
+	public static double dot(int[] g, double x, double y, double z) {
+	    return g[0] * x + g[1] * y + g[2] * z;
+	}
 
 	/**
 	 * Casts a value to a float. May return null.

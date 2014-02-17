@@ -21,9 +21,9 @@
 package net.jlibnoise.model;
 
 import net.jlibnoise.MathHelper;
+import net.jlibnoise.Module;
 import net.jlibnoise.Utils;
 import net.jlibnoise.exception.NoModuleException;
-import net.jlibnoise.module.Module;
 
 /**
  * Model that defines the surface of a cylinder.

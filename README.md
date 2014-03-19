@@ -1,4 +1,4 @@
-# H3 jlibnoise
+### jlibnoise
 jlibnoise is a port of libnoise to Java
 
 http://libnoise.sourceforge.net/

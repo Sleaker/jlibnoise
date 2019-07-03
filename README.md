@@ -1,4 +1,4 @@
-### jlibnoise
+### jlibnoise   [![](https://jitpack.io/v/Sleaker/jlibnoise.svg)](https://jitpack.io/#Sleaker/jlibnoise)
 jlibnoise is a port of libnoise to Java
 
 http://libnoise.sourceforge.net/
